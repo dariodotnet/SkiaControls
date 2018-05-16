@@ -36,6 +36,24 @@ namespace SkiaControls
             set => SetValue(GradientOrientationProperty, value);
         }
 
+        public static readonly BindableProperty IsOnlyBorderProperty = BindableProperty.Create(
+            "IsOnlyBorder", typeof(bool), typeof(ShapeBase), default(bool));
+
+        public bool IsOnlyBorder
+        {
+            get => (bool)GetValue(IsOnlyBorderProperty);
+            set => SetValue(IsOnlyBorderProperty, value);
+        }
+
+        public static readonly BindableProperty BorderWidthProperty = BindableProperty.Create(
+            "BorderWidth", typeof(float), typeof(ShapeBase), 2.0f);
+
+        public float BorderWidth
+        {
+            get => (float)GetValue(BorderWidthProperty);
+            set => SetValue(BorderWidthProperty, value);
+        }
+
         protected SKShader GetGradient(SKImageInfo info, Gradient[] gradients, Orientation orientation)
         {
             var colors = new SKColor[gradients.Length];
