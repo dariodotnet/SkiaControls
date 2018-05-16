@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="SampleSkiaControls.MainPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SampleSkiaControls"
+             xmlns:skiaControls="clr-namespace:SkiaControls.Controls;assembly=SkiaControls"
+             xmlns:skiaModels="clr-namespace:SkiaControls.Models;assembly=SkiaControls"
+             xmlns:skiaShapes="clr-namespace:SkiaControls.Shapes;assembly=SkiaControls">
+    <ScrollView Padding="0,50">
+        <StackLayout VerticalOptions="Center">
+            <Label HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Text="Welcome to Xamarin.Forms with SkiaSharp skiaControls!"
+                   VerticalOptions="Center" />
+            <skiaControls:Button Margin="20,0"
+                                 Padding="5"
+                                 CornerRadius="12"
+                                 HeightRequest="40"
+                                 Text="Hola joven!!!"
+                                 TextSize="30" />
+            <skiaShapes:Rectangle Margin="20,0"
+                                  CornerRadius="12"
+                                  HeightRequest="40" />
+            <skiaShapes:Rectangle Margin="20,0"
+                                  CornerRadius="20"
+                                  HeightRequest="40" />
+            <skiaShapes:Rectangle Margin="20,0"
+                                  CornerRadius="0,0,20,20"
+                                  GradientOrientation="Vertical"
+                                  HeightRequest="40">
+                <skiaShapes:Rectangle.Gradients>
+                    <x:Array Type="{x:Type skiaModels:Gradient}">
+                        <skiaModels:Gradient Color="CornflowerBlue" />
+                        <skiaModels:Gradient Color="DodgerBlue" />
+                        <skiaModels:Gradient Color="DeepSkyBlue" />
+                    </x:Array>
+                </skiaShapes:Rectangle.Gradients>
+            </skiaShapes:Rectangle>
+            <skiaShapes:Rectangle Margin="20,0"
+                                  CornerRadius="20,0,0,20"
+                                  GradientOrientation="Horizontal"
+                                  HeightRequest="40">
+                <skiaShapes:Rectangle.Gradients>
+                    <x:Array Type="{x:Type skiaModels:Gradient}">
+                        <skiaModels:Gradient Color="CornflowerBlue" />
+                        <skiaModels:Gradient Color="DodgerBlue" />
+                        <skiaModels:Gradient Color="DeepSkyBlue" />
+                    </x:Array>
+                </skiaShapes:Rectangle.Gradients>
+            </skiaShapes:Rectangle>
+            <skiaShapes:Rectangle Margin="20,0"
+                                  CornerRadius="0,20,20,0"
+                                  HeightRequest="40" />
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                <skiaShapes:Triangle Margin="20,0"
+                                     HeightRequest="80"
+                                     WidthRequest="80">
+                    <skiaShapes:Triangle.Gradients>
+                        <x:Array Type="{x:Type skiaModels:Gradient}">
+                            <skiaModels:Gradient Color="Red" />
+                            <skiaModels:Gradient Color="Yellow" />
+                            <skiaModels:Gradient Color="Blue" />
+                        </x:Array>
+                    </skiaShapes:Triangle.Gradients>
+                </skiaShapes:Triangle>
+                <skiaShapes:Triangle Margin="20,0"
+                                     AnimateClick="True"
+                                     CornerRadius="2"
+                                     HeightRequest="80"
+                                     WidthRequest="80" />
+                <skiaShapes:Triangle Margin="20,0"
+                                     GradientOrientation="Diagonal"
+                                     HeightRequest="80"
+                                     WidthRequest="80">
+                    <skiaShapes:Triangle.Gradients>
+                        <x:Array Type="{x:Type skiaModels:Gradient}">
+                            <skiaModels:Gradient Color="Red" />
+                            <skiaModels:Gradient Color="Yellow" />
+                            <skiaModels:Gradient Color="Blue" />
+                        </x:Array>
+                    </skiaShapes:Triangle.Gradients>
+                </skiaShapes:Triangle>
+            </StackLayout>
+            <StackLayout HeightRequest="80"
+                         HorizontalOptions="Center"
+                         Orientation="Horizontal">
+                <skiaShapes:Circle GradientOrientation="Diagonal"
+                                   HeightRequest="80"
+                                   WidthRequest="80">
+                    <skiaShapes:Circle.Gradients>
+                        <x:Array Type="{x:Type skiaModels:Gradient}">
+                            <skiaModels:Gradient Color="CornflowerBlue" />
+                            <skiaModels:Gradient Color="DodgerBlue" />
+                            <skiaModels:Gradient Color="DeepSkyBlue" />
+                        </x:Array>
+                    </skiaShapes:Circle.Gradients>
+                </skiaShapes:Circle>
+                <skiaShapes:Circle />
+                <skiaShapes:Circle WidthRequest="15" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

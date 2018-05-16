@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Darío Alonso</Authors>
+    <Company />
+    <Description>Xamarin Forms controls made with SkiaSharp.</Description>
+    <Version>0.0.2001-alpha</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.59.0" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.77107" />
+  </ItemGroup>
+
+</Project>
