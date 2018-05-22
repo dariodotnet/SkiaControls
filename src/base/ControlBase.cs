@@ -62,5 +62,20 @@ namespace SkiaControls
             else
                 Tap.Tapped += TapOnTapped;
         }
+
+        protected float ConvertToDeviceScaleFactor(int value)
+        {
+            return value * (float)Device.info.ScalingFactor;
+        }
+
+        protected float ConvertToDeviceScaleFactor(float value)
+        {
+            return value * (float)Device.info.ScalingFactor;
+        }
+
+        protected float ConvertToDeviceScaleFactor(double value)
+        {
+            return (float)value * (float)Device.info.ScalingFactor;
+        }
     }
 }
