@@ -6,7 +6,7 @@
              xmlns:skiaControls="clr-namespace:SkiaControls.Controls;assembly=SkiaControls"
              xmlns:skiaModels="clr-namespace:SkiaControls.Models;assembly=SkiaControls"
              xmlns:skiaShapes="clr-namespace:SkiaControls.Shapes;assembly=SkiaControls">
-    <Grid Margin="20">
-        <skiaShapes:Circle />
+    <Grid>
+        <skiaShapes:Triangle />
     </Grid>
 </ContentPage>

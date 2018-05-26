@@ -36,10 +36,10 @@ namespace SkiaControls.Shapes
             else
                 _fillPaint.Color = Color.ToSKColor();
 
-            var topLeftRadius = (float)CornerRadius.Left * (float)Device.info.ScalingFactor;
-            var topRightRadius = (float)CornerRadius.Top * (float)Device.info.ScalingFactor;
-            var bottomRightRadius = (float)CornerRadius.Right * (float)Device.info.ScalingFactor;
-            var bottomLeftRadius = (float)CornerRadius.Bottom * (float)Device.info.ScalingFactor;
+            var topLeftRadius = ConvertToDeviceScaleFactor(CornerRadius.Left);
+            var topRightRadius = ConvertToDeviceScaleFactor(CornerRadius.Top);
+            var bottomRightRadius = ConvertToDeviceScaleFactor(CornerRadius.Right);
+            var bottomLeftRadius = ConvertToDeviceScaleFactor(CornerRadius.Bottom);
 
             var topLeft = new SKPoint(0, 0);
             var topRight = new SKPoint(info.Width, 0);
@@ -55,8 +55,36 @@ namespace SkiaControls.Shapes
                 path.ArcTo(bottomLeft, topLeft, bottomLeftRadius);
                 path.Close();
 
-                canvas.DrawPath(path, _fillPaint);
+                canvas.ClipPath(path);
+
+                if (IsOnlyBorder)
+                {
+                    var border = ConvertToDeviceScaleFactor(BorderWidth) * 2;
+
+                    var scalaX = (info.Width - border) / info.Width;
+                    var scalaY = (info.Height - border) / info.Height;
+
+                    canvas.Translate(ConvertToDeviceScaleFactor(BorderWidth), ConvertToDeviceScaleFactor(BorderWidth));
+
+                    canvas.Scale(scalaX, scalaY);
+
+                    using (var center = new SKPath())
+                    {
+                        center.MoveTo(bottomLeft);
+                        center.ArcTo(topLeft, topRight, topLeftRadius);
+                        center.ArcTo(topRight, bottomRight, topRightRadius);
+                        center.ArcTo(bottomRight, bottomLeft, bottomRightRadius);
+                        center.ArcTo(bottomLeft, topLeft, bottomLeftRadius);
+                        center.Close();
+
+                        canvas.ClipPath(center, SKClipOperation.Difference);
+                    }
+
+
+                }
             }
+
+            canvas.DrawPaint(_fillPaint);
         }
     }
 }

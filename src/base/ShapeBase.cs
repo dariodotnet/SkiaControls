@@ -39,6 +39,9 @@ namespace SkiaControls
         public static readonly BindableProperty IsOnlyBorderProperty = BindableProperty.Create(
             "IsOnlyBorder", typeof(bool), typeof(ShapeBase), default(bool));
 
+        /// <summary>
+        /// This property is not implemented on Triangle
+        /// </summary>
         public bool IsOnlyBorder
         {
             get => (bool)GetValue(IsOnlyBorderProperty);
@@ -48,6 +51,9 @@ namespace SkiaControls
         public static readonly BindableProperty BorderWidthProperty = BindableProperty.Create(
             "BorderWidth", typeof(float), typeof(ShapeBase), 2.0f);
 
+        /// <summary>
+        /// This property is not implemented on Triangle
+        /// </summary>
         public float BorderWidth
         {
             get => (float)GetValue(BorderWidthProperty);

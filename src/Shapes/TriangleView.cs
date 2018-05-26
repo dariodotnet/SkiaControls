@@ -35,9 +35,9 @@ namespace SkiaControls.Shapes
             else
                 _fillPaint.Color = Color.ToSKColor();
 
-            var topRadius = (float)CornerRadius.Left * (float)Device.info.ScalingFactor;
-            var bottomRightRadius = (float)CornerRadius.Top * (float)Device.info.ScalingFactor;
-            var bottomLeftRadius = (float)CornerRadius.Right * (float)Device.info.ScalingFactor;
+            var topRadius = ConvertToDeviceScaleFactor(CornerRadius.Left);
+            var bottomRightRadius = ConvertToDeviceScaleFactor(CornerRadius.Top);
+            var bottomLeftRadius = ConvertToDeviceScaleFactor(CornerRadius.Right);
 
             var top = new SKPoint((float)info.Width / 2, 0);
             var bottomRight = new SKPoint(info.Width, info.Height);
