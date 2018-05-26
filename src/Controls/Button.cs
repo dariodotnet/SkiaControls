@@ -8,23 +8,20 @@ namespace SkiaControls.Controls
     /// <inheritdoc />
     public class Button : RoundedBase
     {
+        private Grid _mainGrid;
         private readonly SKPaint _fillPaint = new SKPaint()
         {
             Style = SKPaintStyle.Fill,
             IsAntialias = true
         };
 
-        private readonly SKPaint _text = new SKPaint()
-        {
-            Color = SKColors.Black
-        };
-
         public Button()
         {
-            Padding = new Thickness(0);
+            _mainGrid = new Grid();
             var canvasView = new SKCanvasView();
             canvasView.PaintSurface += OnCanvasViewOnPaintSurface;
-            Content = canvasView;
+            _mainGrid.Children.Add(canvasView);
+            Content = _mainGrid;
         }
 
         protected virtual void OnCanvasViewOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -40,10 +37,10 @@ namespace SkiaControls.Controls
             else
                 _fillPaint.Color = Color.ToSKColor();
 
-            var topLeftRadius = (float)CornerRadius.Left * (float)Device.info.ScalingFactor;
-            var topRightRadius = (float)CornerRadius.Top * (float)Device.info.ScalingFactor;
-            var bottomRightRadius = (float)CornerRadius.Right * (float)Device.info.ScalingFactor;
-            var bottomLeftRadius = (float)CornerRadius.Bottom * (float)Device.info.ScalingFactor;
+            var topLeftRadius = ConvertToDeviceScaleFactor(CornerRadius.Left);
+            var topRightRadius = ConvertToDeviceScaleFactor(CornerRadius.Top);
+            var bottomRightRadius = ConvertToDeviceScaleFactor(CornerRadius.Right);
+            var bottomLeftRadius = ConvertToDeviceScaleFactor(CornerRadius.Bottom);
 
             var topLeft = new SKPoint(0, 0);
             var topRight = new SKPoint(info.Width, 0);
@@ -59,39 +56,56 @@ namespace SkiaControls.Controls
                 path.ArcTo(bottomLeft, topLeft, bottomLeftRadius);
                 path.Close();
 
-                canvas.DrawPath(path, _fillPaint);
+                canvas.ClipPath(path);
+
+                if (IsOnlyBorder)
+                {
+                    var border = ConvertToDeviceScaleFactor(BorderWidth) * 2;
+
+                    var scalaX = (info.Width - border) / info.Width;
+                    var scalaY = (info.Height - border) / info.Height;
+
+                    canvas.Translate(ConvertToDeviceScaleFactor(BorderWidth), ConvertToDeviceScaleFactor(BorderWidth));
+
+                    canvas.Scale(scalaX, scalaY);
+
+                    using (var center = new SKPath())
+                    {
+                        center.MoveTo(bottomLeft);
+                        center.ArcTo(topLeft, topRight, topLeftRadius);
+                        center.ArcTo(topRight, bottomRight, topRightRadius);
+                        center.ArcTo(bottomRight, bottomLeft, bottomRightRadius);
+                        center.ArcTo(bottomLeft, topLeft, bottomLeftRadius);
+                        center.Close();
+
+                        canvas.ClipPath(center, SKClipOperation.Difference);
+                    }
+
+
+                }
             }
 
-            if (string.IsNullOrEmpty(Text))
-                return;
-            var textWidth = _text.MeasureText(Text);
-            var height = CalculateScaled.Size(TextSize) / 100 * info.Width * _text.TextSize / textWidth;
-            _text.TextSize = height < info.Height - 10 ? height : info.Height - 10;
-            var textBounds = new SKRect();
-            _text.MeasureText(Text, ref textBounds);
-
-            var xText = (float)info.Width / 2 - textBounds.MidX;
-            var yText = (float)info.Height / 2 - textBounds.MidY;
-
-            canvas.DrawText(Text, xText, yText, _text);
+            canvas.DrawPaint(_fillPaint);
         }
 
         public static readonly BindableProperty TextProperty = BindableProperty.Create(
-            "Text", typeof(string), typeof(Button), default(string));
+            "Label", typeof(Label), typeof(Button), default(Label), propertyChanged: TextChanged);
 
-        public string Text
+        private static void TextChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
+            if (newvalue == null)
+                return;
+            var button = (Button)bindable;
+            if (button._mainGrid.Children.Count > 1)
+                button._mainGrid.Children.Remove(button._mainGrid.Children[1]);
+
+            button._mainGrid.Children.Add((Label)newvalue);
         }
 
-        public static readonly BindableProperty TextSizeProperty = BindableProperty.Create(
-            "TextSize", typeof(float), typeof(Button), 20f);
-
-        public float TextSize
+        public Label Label
         {
-            get => (float)GetValue(TextSizeProperty);
-            set => SetValue(TextSizeProperty, value);
+            get => (Label)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
     }
 }
