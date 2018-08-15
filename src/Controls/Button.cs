@@ -2,13 +2,15 @@
 using SkiaSharp.Views.Forms;
 using System.Linq;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace SkiaControls.Controls
 {
     /// <inheritdoc />
+    [Preserve(AllMembers = true)]
     public class Button : RoundedBase
     {
-        private Grid _mainGrid;
+        private readonly Grid _mainGrid;
         private readonly SKPaint _fillPaint = new SKPaint()
         {
             Style = SKPaintStyle.Fill,
