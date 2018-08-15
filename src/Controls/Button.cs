@@ -24,6 +24,7 @@ namespace SkiaControls.Controls
             canvasView.PaintSurface += OnCanvasViewOnPaintSurface;
             _mainGrid.Children.Add(canvasView);
             Content = _mainGrid;
+            AnimateClick = true;
         }
 
         protected virtual void OnCanvasViewOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
