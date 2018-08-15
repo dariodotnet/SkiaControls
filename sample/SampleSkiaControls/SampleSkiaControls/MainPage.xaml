@@ -6,5 +6,16 @@
              xmlns:skiaControls="clr-namespace:SkiaControls.Controls;assembly=SkiaControls"
              xmlns:skiaModels="clr-namespace:SkiaControls.Models;assembly=SkiaControls"
              xmlns:skiaShapes="clr-namespace:SkiaControls.Shapes;assembly=SkiaControls">
-    <Grid Margin="20" />
+    <Grid Margin="20">
+        <StackLayout VerticalOptions="Center">
+            <skiaShapes:Circle BorderWidth="5"
+                               HeightRequest="48"
+                               IsOnlyBorder="True" />
+            <skiaShapes:Circle HeightRequest="48" Color="DodgerBlue" />
+            <skiaShapes:Circle HeightRequest="48" Color="LightCoral" />
+            <skiaShapes:Circle HeightRequest="48" Color="IndianRed" />
+            <skiaShapes:Circle HeightRequest="48" Color="LightYellow" />
+            <skiaControls:RadioButton HeightRequest="22" Color="DodgerBlue" />
+        </StackLayout>
+    </Grid>
 </ContentPage>
