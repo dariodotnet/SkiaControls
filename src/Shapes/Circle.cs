@@ -39,7 +39,7 @@ namespace SkiaControls.Shapes
 
             if (IsOnlyBorder)
             {
-                radius = radius - CalculateScaled.Size(BorderWidth);
+                radius = radius - ConvertToDeviceScaleFactor(BorderWidth);
                 _fillPaint.Style = SKPaintStyle.Stroke;
                 _fillPaint.StrokeWidth = CalculateScaled.Size(BorderWidth);
             }
