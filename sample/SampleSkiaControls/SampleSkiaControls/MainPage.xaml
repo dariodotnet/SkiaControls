@@ -16,6 +16,13 @@
             <skiaShapes:Circle HeightRequest="48" Color="IndianRed" />
             <skiaShapes:Circle HeightRequest="48" Color="LightYellow" />
             <skiaControls:RadioButton HeightRequest="22" Color="DodgerBlue" />
+            <skiaControls:Button CornerRadius="6" IsOnlyBorder="True">
+                <skiaControls:Button.Label>
+                    <Label Margin="12,0"
+                           Text="Hola"
+                           VerticalTextAlignment="Center" />
+                </skiaControls:Button.Label>
+            </skiaControls:Button>
         </StackLayout>
     </Grid>
 </ContentPage>
